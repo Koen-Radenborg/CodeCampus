@@ -8,11 +8,13 @@ const CourseCard = ({ course }) => {
       </article>
     );
 
-  const openCourseVideo = (url) => {
-    return () => {
-      console.log('Video URL:', url);
+    const openCourseVideo = (url) => {
+      return () => {
+        console.log('Video URL:', url);
+        window.open(url, '_blank');
+      };
     };
-  };
+    
 
   return (
     <article className='course-card'>

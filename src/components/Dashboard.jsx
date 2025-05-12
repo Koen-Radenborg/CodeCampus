@@ -12,11 +12,11 @@ const Dashboard = ({ courseData }) => {
 
     if (activeTab === 'all') {
       return courseData;
-    } else if (actieTab === 'beginner') {
+    } else if (activeTab === 'beginner') {
       return courseData.filter((course) => course.level === 'Beginner');
-    } else if (actieTab === 'gevorderd') {
+    } else if (activeTab === 'gevorderd') {
       return courseData.filter((course) => course.level === 'Gevorderd');
-    } else if (actieTab === 'populair') {
+    } else if (activeTab === 'populair') {
       return [...courseData].sort((a, b) => b.views - a.views);
     }
     return courseData;
