@@ -7,6 +7,25 @@ function App() {
   const [courseData, setCourseData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [theme, setTheme] = useState('dark'); // Default dark
+  
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+      document.body.classList.add('theme-transition');
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = () => {

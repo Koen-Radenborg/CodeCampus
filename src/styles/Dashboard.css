@@ -250,15 +250,17 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  justify-content: center;
   align-items: center;
   position: relative;
 }
 
+/* Styling voor individuele tag-knoppen */
 .tag-button {
   padding: 8px 16px;
   border: none;
   border-radius: 20px;
-  background-color: #e0e0e0; 
+  background-color: #e0e0e0;
   color: #333;
   font-weight: 500;
   cursor: pointer;
@@ -276,6 +278,75 @@
   outline: 2px solid #2980b9;
   outline-offset: 2px;
 }
+
+/* Dropdown toggle knop */
+.tag-dropdown-toggle {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: #e0e0e0;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+  min-width: 120px;
+  text-align: center;
+}
+
+.tag-dropdown-toggle:hover,
+.tag-dropdown-toggle:focus {
+  background-color: #c0c0c0;
+  outline: none;
+}
+
+.tag-dropdown-toggle.active {
+  background: linear-gradient(90deg, #5dade2 0%, #9b59b6 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(155, 89, 182, 0.5);
+  outline: 2px solid #2980b9;
+  outline-offset: 2px;
+}
+
+/* Dropdown menu styling */
+.tag-dropdown-menu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  z-index: 100;
+  min-width: 180px;
+  max-width: 300px;
+}
+
+/* RESPONSIVE */
+/* Op schermen <= 600px: verberg de tag-buttons, toon dropdown */
+@media (max-width: 600px) {
+  .tag-buttons {
+    display: none;
+  }
+  .tag-dropdown-container {
+    display: block;
+    position: relative;
+  }
+}
+
+/* Op schermen > 600px: verberg dropdown toggle */
+@media (min-width: 601px) {
+  .tag-buttons {
+    display: flex;
+  }
+  .tag-dropdown-container {
+    display: none;
+  }
+}
+
+
 
 .clear-tags-text-container {
   display: flex;
@@ -299,7 +370,19 @@
   outline: none;
 }
 
+@media (max-width: 600px) {
+  .tag-buttons button {
+    display: none;
+  }
+  .tag-dropdown {
+    display: block;
+    margin-bottom: 8px;
+  }
+}
+
+
 .modal {
+  position: relative;
   background-color: white;
   border-radius: 12px;
   overflow: hidden;
@@ -312,6 +395,7 @@
   max-width: 1200px;
   padding: 6px;
 }
+
 
 .modalContainer {
   position: fixed;
@@ -414,5 +498,80 @@
 
 .clear-search-button:hover {
   color: #666;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.favorite-button:hover {
+  transform: scale(1.2);
+}
+
+.favorite-icon {
+  font-size: 1.8rem;
+  color: gold;
+}
+
+.theme-switch-container {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  z-index: 200;
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.4s;
+}
+
+.theme-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+/* Checked */
+.theme-switch input:checked + .slider {
+  background-color: #3c4042;
+}
+
+.theme-switch input:checked + .slider:before {
+  transform: translateX(24px);
 }
 

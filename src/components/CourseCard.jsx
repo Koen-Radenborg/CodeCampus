@@ -1,17 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/CourseCard.css';
 import '../styles/Dashboard.css';
 
 const CourseCard = ({ course, onTagClick, selectedTags, setSearchTerm }) => {
   const [showModal, setShowModal] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  if (!course) {
-    return (
-      <article className='course-card empty'>
-        Geen cursus informatie beschikbaar
-      </article>
-    );
-  }
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setIsFavorite(favorites.includes(course.id));
+  }, [course.id]);
+
+  const toggleFavorite = () => {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const updatedFavorites = isFavorite
+      ? favorites.filter(id => id !== course.id)
+      : [...favorites, course.id];
+
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    setIsFavorite(!isFavorite);
+  };
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = (e) => {
@@ -24,6 +32,14 @@ const CourseCard = ({ course, onTagClick, selectedTags, setSearchTerm }) => {
     const videoId = url.split('v=')[1]?.split('&')[0];
     return videoId ? `https://www.youtube.com/embed/${videoId}` : '';
   };
+
+  if (!course) {
+    return (
+      <article className='course-card empty'>
+        Geen cursus informatie beschikbaar
+      </article>
+    );
+  }
 
   return (
     <>
@@ -58,6 +74,17 @@ const CourseCard = ({ course, onTagClick, selectedTags, setSearchTerm }) => {
       {showModal && (
         <div className='modalContainer' onClick={handleCloseModal}>
           <div className='modal'>
+            <button
+              className='favorite-button'
+              onClick={toggleFavorite}
+              aria-label={isFavorite ? 'Verwijder van favorieten' : 'Voeg toe aan favorieten'}
+            >
+              <ion-icon
+                name={isFavorite ? 'star' : 'star-outline'}
+                class='favorite-icon'
+              ></ion-icon>
+            </button>
+
             <div className='video-wrapper'>
               <iframe
                 src={getYoutubeEmbedUrl(course.videoUrl)}
@@ -84,7 +111,7 @@ const CourseCard = ({ course, onTagClick, selectedTags, setSearchTerm }) => {
                     }
                   }}
                 >
-                   meer van {course.instructor}
+                  meer van {course.instructor}
                 </span>
               </p>
               <p>{course.description}</p>

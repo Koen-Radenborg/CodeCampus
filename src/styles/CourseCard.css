@@ -88,7 +88,7 @@
 .duration {
   font-size: 13px;
   color: var(--text-light);
-  background-color: #f8f9fa;
+  background-color: var(--course-detail-bg, #f8f9fa);
   padding: 5px 10px;
   border-radius: 20px;
   display: inline-block;
@@ -100,7 +100,7 @@
   justify-content: space-between;
   margin-bottom: 20px;
   padding-top: 15px;
-  border-top: 1px solid #f1f3f5;
+  border-top: 1px solid var(--course-stats-border, #f1f3f5);
   font-size: 13px;
 }
 
@@ -142,7 +142,7 @@
 .empty-list {
   padding: 40px;
   text-align: center;
-  background-color: #f8f9fa;
+  background-color: var(--course-detail-bg, #f8f9fa);
   border-radius: var(--border-radius);
   color: var(--text-light);
   font-size: 16px;
@@ -162,4 +162,14 @@
   .course-image {
     height: 160px;
   }
+}
+
+/* 🌙 Dark mode overrides */
+.dark {
+  --card-bg: #1e1e1e;
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --text-light: #aaaaaa;
+  --course-detail-bg: #2a2a2a;
+  --course-stats-border: #333;
 }
