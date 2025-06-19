@@ -3,6 +3,7 @@ import '../styles/Dashboard.css';
 import CourseList from './CourseList';
 import PopularCourses from './PopularCourses';
 import Statistics from './Statistics';
+import FaqWidget from './FaQ';
 
 const allTags = [
   'web', 'javascript', 'frontend', 'react', 'backend', 'node', 'api', 'python',
@@ -249,6 +250,7 @@ const [theme, setTheme] = useState(() => {
         <aside className='sidebar'>
           <PopularCourses courses={courseData} />
           <Statistics courses={courseData} />
+          <FaqWidget />
         </aside>
       </div>
     </section>
